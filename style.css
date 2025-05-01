@@ -6,6 +6,10 @@ body {
     background-color: #000000; /* Light grey background */
     font-family: sans-serif;
     margin: 0;
+    width: 100vw;
+    height: 100dvh;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .container {
@@ -14,19 +18,36 @@ body {
     /* keep full height centering via flex */
     perspective: 800px; /* Increase depth for stronger 3D effect */
     perspective-origin: 50% 50%; /* Center the perspective origin */
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 0 4vw;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30dvh;
+    min-height: 120px;
 }
 
 #rotating-text {
-    font-size: 2.5rem; /* Not too big */
+    font-size: clamp(1.5rem, 6vw, 2.5rem); /* Not too big */
     font-weight: bold;
     /* Rotating text positioned just left of 'ability' */
     position: absolute;
-    right: calc(50% + 1px); /* right edge sits just left of center */
+    right: 50%; /* right edge sits just left of center */
     transform-style: preserve-3d; /* Enable 3D transforms */
     transform-origin: center center; /* Pivot at center for block-like rotation */
     backface-visibility: hidden; /* Hide backside during rotation */
     transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Animation timing */
     /* transition: opacity 0.5s ease-in-out; */ /* Remove old transition */
+    width: max-content;
+    max-width: 48vw;
+    min-width: 0;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .neon-blue {
@@ -41,7 +62,20 @@ body {
     /* static 'ability' aligned at center + offset */
     position: absolute;
     /* left: calc(50% + 8px); left edge sits just right of center */
+    left: 50%;
     color: #ffffff;
-    font-size: 2.5rem; /* Match rotating text size */
+    font-size: clamp(1.5rem, 6vw, 2.5rem); /* Match rotating text size */
     font-weight: bold;   /* Match rotating text weight */
+    white-space: nowrap;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .container {
+        height: 20dvh;
+        padding: 0 2vw;
+    }
+    #rotating-text, .white-text {
+        font-size: clamp(1.2rem, 8vw, 2rem);
+    }
 }
