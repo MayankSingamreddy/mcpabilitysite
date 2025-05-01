@@ -1,23 +1,22 @@
 const words = [
-    "mcp",
-    "Manage",
-    "Reli",
-    "Avail",
-    "Service",
-    "Performance",
-    "Security",
-    "Observability",
-    "Config",
-    "Administr",
-    "Oper",
-    "Maintain",
-    "Upgrad",
-    "Automation",
-    "Orchestration",
-    "Fault Management-",
-    "Performance",
-    "Cost manag",
-    "Compliance-",
+    // "mcp",
+    "manage",
+    "reli",
+    "avail",
+    "service",
+    "performance optimiz",
+    "secura",
+    "observ",
+    "configur",
+    "administr",
+    "oper",
+    "maintain",
+    "upgrad",
+    "automat",
+    "orchestr",
+    "fault manage",
+    "cost manag",
+    "compli",
     "mcp"
 ];
 
@@ -27,18 +26,32 @@ let intervalTime = 1500; // Time word is fully visible
 const finalPauseTime = 3000; // Longer pause for the final "mcp"
 const animTime = 400; // Duration of the rotation animation (matches CSS)
 
+// Compute max width to lock rotating-text and keep static 'ability' in place
+function setFixedRotatorWidth() {
+    const temp = rotatingTextElement.cloneNode();
+    temp.style.visibility = 'hidden';
+    temp.style.position = 'absolute';
+    temp.style.width = 'auto';
+    document.body.appendChild(temp);
+    let maxW = 0;
+    words.forEach(word => {
+        temp.textContent = word;
+        const w = temp.getBoundingClientRect().width;
+        if (w > maxW) maxW = w;
+    });
+    document.body.removeChild(temp);
+    rotatingTextElement.style.width = `${maxW}px`;
+    rotatingTextElement.style.textAlign = 'right';
+}
+
 function scheduleNextRotation() {
-    // Use final pause at loop end, dynamic parabolic elsewise
+    // Use final pause at loop end, constant linear pause for others
     const totalSteps = words.length - 1;
     let pauseDuration;
     if (currentIndex === totalSteps) {
         pauseDuration = finalPauseTime;
     } else {
-        const initialPause = 500;
-        const minPause = 200;
-        const x = currentIndex / totalSteps;
-        const f = 1 - Math.pow(2 * x - 1, 2);
-        pauseDuration = initialPause - f * (initialPause - minPause);
+        pauseDuration = 300;
     }
     setTimeout(startAnimationOut, pauseDuration);
 }
@@ -69,8 +82,11 @@ function changeWordAndAnimateIn() {
     scheduleNextRotation();
 }
 
-// Start the first rotation cycle
-scheduleNextRotation();
+// Initialize after DOM ready: set width then start rotating
+document.addEventListener('DOMContentLoaded', () => {
+    setFixedRotatorWidth();
+    setTimeout(scheduleNextRotation, 500);
+});
 
 /* // Old rotation logic - removed
 function rotateWords() {
