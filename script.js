@@ -14,17 +14,16 @@ const words = [
     "upgrad",
     "automat",
     "orchestr",
-    "fault manage",
+    "fault toler",
     "cost manag",
     "compli",
-    "mcp"
+    "that's MCP"
 ];
 
 const rotatingTextElement = document.getElementById('rotating-text');
 let currentIndex = 0;
-let intervalTime = 1500; // Time word is fully visible
-const finalPauseTime = 3000; // Longer pause for the final "mcp"
-const animTime = 400; // Duration of the rotation animation (matches CSS)
+const finalPauseTime = 6000; // Longer pause for the final "mcp"
+const animTime = 50; // Duration of the rotation animation (matches CSS)
 
 // Compute max width to lock rotating-text and keep static 'ability' in place
 function setFixedRotatorWidth() {
@@ -51,7 +50,7 @@ function scheduleNextRotation() {
     if (currentIndex === totalSteps) {
         pauseDuration = finalPauseTime;
     } else {
-        pauseDuration = 300;
+        pauseDuration = 150;
     }
     setTimeout(startAnimationOut, pauseDuration);
 }
@@ -85,32 +84,5 @@ function changeWordAndAnimateIn() {
 // Initialize after DOM ready: set width then start rotating
 document.addEventListener('DOMContentLoaded', () => {
     setFixedRotatorWidth();
-    setTimeout(scheduleNextRotation, 500);
+    setTimeout(scheduleNextRotation, 1500);
 });
-
-/* // Old rotation logic - removed
-function rotateWords() {
-    // Fade out
-    rotatingTextElement.style.opacity = 0;
-
-    setTimeout(() => {
-        currentIndex = (currentIndex + 1) % words.length;
-        rotatingTextElement.textContent = words[currentIndex];
-        // Fade in
-        rotatingTextElement.style.opacity = 1;
-
-        // Determine the next interval time
-        let nextInterval = intervalTime;
-        if (currentIndex === words.length - 1) { // If it's the last word ("mcp")
-           nextInterval = finalPauseTime; // Use the longer pause
-        }
-
-        // Set timeout for the next rotation
-        setTimeout(rotateWords, nextInterval);
-
-    }, 500); // Wait for fade out transition to complete (matches CSS transition time)
-}
-
-// Start the rotation after an initial pause
-setTimeout(rotateWords, intervalTime); 
-*/ 

@@ -21,7 +21,7 @@ body {
     font-weight: bold;
     /* Rotating text positioned just left of 'ability' */
     position: absolute;
-    right: calc(50% + 8px); /* right edge sits just left of center */
+    right: calc(50% + 1px); /* right edge sits just left of center */
     transform-style: preserve-3d; /* Enable 3D transforms */
     transform-origin: center center; /* Pivot at center for block-like rotation */
     backface-visibility: hidden; /* Hide backside during rotation */
