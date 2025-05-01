@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000000; /* Light grey background */
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    perspective: 800px; /* Increase depth for stronger 3D effect */
+    perspective-origin: 50% 50%; /* Center the perspective origin */
+}
+
+span {
+    font-size: 2.5rem; /* Not too big */
+    font-weight: bold;
+    display: inline-block; /* Needed for transforms */
+    transform-style: preserve-3d; /* Enable 3D transforms */
+    transform-origin: center center; /* Pivot at center for block-like rotation */
+    backface-visibility: hidden; /* Hide backside during rotation */
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Animation timing */
+    /* transition: opacity 0.5s ease-in-out; */ /* Remove old transition */
+}
+
+.neon-blue {
+    color: #1095cf; /* Neon blue */
+    /* text-shadow: 
+        0 0 5px #39ff14,
+        0 0 10px #39ff14,
+        0 0 20px #39ff14;  */
+}
+
+.white-text {
+    color: #ffffff; /* Black */
+} 
